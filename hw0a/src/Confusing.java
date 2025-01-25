@@ -29,7 +29,17 @@ public class Confusing {
 }
 
 /* Before running the code, type your answer below.
-
+I am method 1.
+I am method 1.
+I am method 2.
+I am method 3.
+I am method 1.
+I am method 1.
+I am method 2.
+I am method 1.
+I am method 2.
+I am method 3.
+I am method 1.
 TODO: Write output here
 
 Then, click the green play button to check your work. */
