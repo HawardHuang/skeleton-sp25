@@ -1,68 +1,82 @@
 import java.util.ArrayList;
 import java.util.List;
 
-public class ListExercises {
+public class JavaExercises {
 
-    /** Returns the total sum in a list of integers */
-    public static int sum(List<Integer> L) {
-        int total = 0;
-        for (int num : L) {
-            total += num;
-        }
-        return total;
+    /** Returns an array [1, 2, 3, 4, 5, 6] */
+    public static int[] makeDice() {
+        return new int[] {1, 2, 3, 4, 5, 6};
     }
 
-    /** Returns a list containing the even numbers of the given list */
-    public static List<Integer> evens(List<Integer> L) {
-        List<Integer> evenList = new ArrayList<>();
-        for (int num : L) {
-            if (num % 2 == 0) {
-                evenList.add(num);
-            }
+    /** Returns the order depending on the customer.
+     *  If the customer is Ergun, return ["beyti", "pizza", "hamburger", "tea"].
+     *  If the customer is Erik, return ["sushi", "pasta", "avocado", "coffee"].
+     *  In any other case, return an empty String[] of size 3. */
+    public static String[] takeOrder(String customer) {
+        if ("Ergun".equalsIgnoreCase(customer)) {
+            return new String[]{"beyti", "pizza", "hamburger", "tea"};
+        } else if ("Erik".equalsIgnoreCase(customer)) {
+            return new String[]{"sushi", "pasta", "avocado", "coffee"};
+        } else {
+            return new String[3]; // Empty array of size 3
         }
-        return evenList;
     }
 
-    /** Returns a list containing the common items of the two given lists */
-    public static List<Integer> common(List<Integer> L1, List<Integer> L2) {
-        List<Integer> commonList = new ArrayList<>();
-        for (int num : L1) {
-            if (L2.contains(num) && !commonList.contains(num)) {
-                commonList.add(num);
+    /** Returns the positive difference between the maximum element and minimum element of the given array.
+     *  Assumes array is nonempty. */
+    public static int findMinMax(int[] array) {
+        int min = array[0];
+        int max = array[0];
+
+        for (int num : array) {
+            if (num < min) {
+                min = num;
+            }
+            if (num > max) {
+                max = num;
             }
         }
-        return commonList;
+
+        return max - min;
     }
 
-    /** Returns the number of occurrences of the given character in a list of strings. */
-    public static int countOccurrencesOfC(List<String> words, char c) {
-        int count = 0;
-        for (String word : words) {
-            for (char ch : word.toCharArray()) {
-                if (ch == c) {
-                    count++;
-                }
-            }
+    /**
+     * Uses recursion to compute the hailstone sequence as a list of integers starting from an input number n.
+     * Hailstone sequence is described as:
+     *    - Pick a positive integer n as the start
+     *        - If n is even, divide n by 2
+     *        - If n is odd, multiply n by 3 and add 1
+     *    - Continue this process until n is 1
+     */
+    public static List<Integer> hailstone(int n) {
+        return hailstoneHelper(n, new ArrayList<>());
+    }
+
+    private static List<Integer> hailstoneHelper(int x, List<Integer> list) {
+        list.add(x);
+        if (x == 1) {
+            return list;
+        } else if (x % 2 == 0) {
+            return hailstoneHelper(x / 2, list);
+        } else {
+            return hailstoneHelper(3 * x + 1, list);
         }
-        return count;
     }
 
     public static void main(String[] args) {
-        // Test sum
-        List<Integer> numbers = List.of(1, 2, 3, 4, 5);
-        System.out.println("Sum: " + sum(numbers)); // Expected: 15
+        // Test makeDice
+        System.out.println("makeDice: " + java.util.Arrays.toString(makeDice()));
 
-        // Test evens
-        List<Integer> mixedNumbers = List.of(1, 2, 3, 4, 5, 6);
-        System.out.println("Evens: " + evens(mixedNumbers)); // Expected: [2, 4, 6]
+        // Test takeOrder
+        System.out.println("Ergun's order: " + java.util.Arrays.toString(takeOrder("Ergun")));
+        System.out.println("Erik's order: " + java.util.Arrays.toString(takeOrder("Erik")));
+        System.out.println("Unknown customer's order: " + java.util.Arrays.toString(takeOrder("Alice")));
 
-        // Test common
-        List<Integer> list1 = List.of(1, 2, 3, 4, 5);
-        List<Integer> list2 = List.of(3, 4, 5, 6, 7);
-        System.out.println("Common: " + common(list1, list2)); // Expected: [3, 4, 5]
+        // Test findMinMax
+        int[] testArray = {4, 2, 9, 1, 7};
+        System.out.println("findMinMax: " + findMinMax(testArray));
 
-        // Test countOccurrencesOfC
-        List<String> words = List.of("apple", "banana", "cherry");
-        System.out.println("Occurrences of 'a': " + countOccurrencesOfC(words, 'a')); // Expected: 4
+        // Test hailstone
+        System.out.println("Hailstone sequence (start 7): " + hailstone(7));
     }
 }
