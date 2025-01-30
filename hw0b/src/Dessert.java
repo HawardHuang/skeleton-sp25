@@ -10,7 +10,7 @@ public class Dessert {
     public void printDessert() {
         System.out.println(flavor + " " + price + " " + numDesserts);
     }
-    public static void main(String[] args) {Dessert brownie = new Dessert(1, 2);
+    public static void main(String[] args) {
         System.out.println("I love dessert!");
     }
 }
