@@ -19,7 +19,6 @@ public class GameLogic {
      *              if no merge occurs, then return 0.
      */
     public static int moveTileUpAsFarAsPossible(int[][] board, int r, int c, int minR) {
-        // TODO: Fill this in in tasks 2, 3, 4
         int value = board[r][c];
         if (value == 0) {
             return 0;
@@ -47,7 +46,6 @@ public class GameLogic {
      * @param c         the column to tilt up.
      */
     public static void tiltColumn(int[][] board, int c) {
-        // TODO: fill this in in task 5
         int size = board.length;
         int[] temp = new int[size];
         int index = 0;
@@ -58,12 +56,13 @@ public class GameLogic {
         }
         int[] newColumn = new int[size];
         int newIndex = 0;
-        for (int i = 0; i < index; i++) {
+        for (int i = 0; i < index;) {
             if (i < index - 1 && temp[i] == temp[i + 1]) {
                 newColumn[newIndex++] = temp[i] * 2;
-                i++;
+                i = i + 2;
             } else {
                 newColumn[newIndex++] = temp[i];
+                i = i + 1;
             }
         }
         for (int r = 0; r < size; r++) {
@@ -77,7 +76,6 @@ public class GameLogic {
      * @param board     the current state of the board.
      */
     public static void tiltUp(int[][] board) {
-        // TODO: fill this in in task 6
         int size = board.length;
         for (int c = 0; c < size; c++) {
             tiltColumn(board, c);
@@ -92,7 +90,6 @@ public class GameLogic {
      * @param side  the direction to tilt
      */
     public static void tilt(int[][] board, Side side) {
-        // TODO: fill this in in task 7
         if (side == Side.EAST) {
             rotateLeft(board);
             tiltUp(board);
